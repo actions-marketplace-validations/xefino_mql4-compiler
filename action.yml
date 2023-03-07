@@ -30,10 +30,10 @@ runs:
   steps:
   - run: |
       $scriptPath = "${{ github.workspace }}\entrypoint.ps1"
-      ls
+      Get-ChildItem -Force
       Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
       & $scriptPath -Files ${{ inputs.path }} -Includes ${{ inputs.includes }} -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
-    shell: pwsh
+  shell: pwsh
 
 branding:
   icon: 'bar-chart'
