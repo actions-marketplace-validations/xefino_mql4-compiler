@@ -12,7 +12,7 @@ param (
     [string] $Includes,
 
     [Parameter()]
-    [bool] $SyntaxOnly
+    [string] $SyntaxOnly
 )
 
 # Create the download URL for MetaEditor
@@ -39,7 +39,7 @@ $args.Add('/inc:"{0}"' -f $Includes)
 $args.Add('/log:"{0}"' -f $LogFile)
 
 # If we want to check syntax only then add that flag to the arguments as well
-if ($SyntaxOnly) {
+if ([System.Management.Automation.LanguagePrimitives]::ConvertToBoolean($SyntaxOnly) {
     $args.Add("/s")
 }
 
