@@ -38,14 +38,14 @@ if ($verbose) {
     Write-Host "Creating log file $($LogFile)..."
 }
 
-Out-File -FilePath (Resolve-Path $LogFile)
+Out-File -FilePath $LogFile
 
 # Create our new list of arguments and add the portable flag to it
 $args = New-Object System.Collections.Generic.List[string]
 $args.Add("/portable")
 $args.Add('/compile:"{0}"' -f (Resolve-Path $Files))
 $args.Add('/inc:"{0}"' -f $Includes)
-$args.Add('/log:"{0}"' -f $LogFile)
+$args.Add('/log:"{0}"' -f (Resolve-Path $LogFile))
 
 # If we want to check syntax only then add that flag to the arguments as well
 if ([System.Convert]::ToBoolean($SyntaxOnly)) {
