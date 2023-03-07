@@ -50,5 +50,14 @@ if ($verbose) {
     Write-Host "Calling $($exePath) $($args -join " ")..."
 }
 
-# Finally, run metaeditor with our list of arguments
-Start-Process $exePath -ArgumentList $args
+# Run metaeditor with our list of arguments
+try {
+    Start-Process $exePath -ArgumentList $args
+} catch {
+    if ($verbose) {
+        Write-Error "Compilation failed, error: $($_.Excaption.Message)"
+    }
+}
+
+# If we reached this point then we have a log file so print it
+gc $LogFile
