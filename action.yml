@@ -7,10 +7,8 @@ inputs:
     description: 'Path to files that should be compiled'
     required: true
   includes:
-    description: 'List of paths for includes'
+    description: 'Path of include files'
     required: false
-    default: []
-    type: comma-delimited-list
   version:
     description: 'MetaTrader 4 platform version to use'
     required: true

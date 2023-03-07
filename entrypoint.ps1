@@ -9,7 +9,7 @@ param (
     [string] $Version,
 
     [Parameter()]
-    [string[]] $Includes,
+    [string] $Includes,
 
     [Parameter()]
     [bool] $Verbose,
@@ -37,16 +37,8 @@ try {
 # Create our new list of arguments and add the portable flag to it
 $args = New-Object System.Collections.Generic.List[string]
 $args.Add("/portable")
-
-# Add the files we should compile to our list of arguments
 $args.Add('/compile:"{0}"' -f $Files)
-
-# Iterate over all the includes we have and convert each to an argument
-foreach ($include in $Includes) {
-    $args.Add('/inc:"{0}"' -f $include)
-}
-
-# Add the log file to our list of arguments
+$args.Add('/inc:"{0}"' -f $Includes)
 $args.Add('/log:"{0}"' -f $LogFile)
 
 # If we want to check syntax only then add that flag to the arguments as well
