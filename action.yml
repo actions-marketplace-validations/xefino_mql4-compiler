@@ -28,16 +28,10 @@ inputs:
 runs:
   using: composite
   steps:
-  - name: Check Files
-    shell: powershell
-    run: Get-ChildItem -Force
-  - name: Set Execution Policy
-    shell: powershell
-    run: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
   - name: Run Compiler
     shell: powershell
     run: |
-      $scriptPath = "${{ github.workspace }}\entrypoint.ps1"
+      $scriptPath = "${{ github.action_path }}\entrypoint.ps1"
       & $scriptPath -Files ${{ inputs.path }} -Includes ${{ inputs.includes }} -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
 
 branding:
