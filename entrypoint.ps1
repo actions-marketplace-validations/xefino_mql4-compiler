@@ -12,9 +12,6 @@ param (
     [string] $Includes,
 
     [Parameter()]
-    [bool] $Verbose,
-
-    [Parameter()]
     [bool] $SyntaxOnly
 )
 
