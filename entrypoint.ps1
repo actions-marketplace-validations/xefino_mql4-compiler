@@ -38,13 +38,14 @@ if ($verbose) {
     Write-Host "Creating log file $($LogFile)..."
 }
 
+# create the log file so the compiler can write to it
 Out-File -FilePath $LogFile
 
 # Create our new list of arguments and add the portable flag to it
 $args = New-Object System.Collections.Generic.List[string]
 $args.Add("/portable")
 $args.Add('/compile:"{0}"' -f (Resolve-Path $Files))
-$args.Add('/inc:"{0}"' -f $Includes)
+$args.Add('/inc:"{0}"' -f (Resolve-Path $Includes))
 $args.Add('/log:"{0}"' -f (Resolve-Path $LogFile))
 
 # If we want to check syntax only then add that flag to the arguments as well
@@ -58,7 +59,7 @@ if ($verbose) {
 
 # Run metaeditor with our list of arguments
 try {
-    Start-Process $exePath -ArgumentList $args
+    Start-Process (Resolve-Path $exePath) -ArgumentList $args
 } catch {
     if ($verbose) {
         Write-Error "Compilation failed, error: $($_.Excaption.Message)"
