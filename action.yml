@@ -30,8 +30,10 @@ runs:
   steps:
   - name: Run Compiler
     shell: powershell
-    run: ${{ github.action_path }}\entrypoint.ps1 -Files ${{ inputs.path }} -Includes ${{ inputs.includes }} -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
-
+    run: |
+      $switchParam = if (${{ inputs.includes }}) { '${{ inputs.includes }}' } else { '.' }
+      ${{ github.action_path }}\entrypoint.ps1 -Files ${{ inputs.path }} -Includes $switchParam -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
+ 
 branding:
   icon: 'bar-chart'
   color: 'blue'
