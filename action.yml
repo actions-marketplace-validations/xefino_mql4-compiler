@@ -28,7 +28,7 @@ inputs:
 runs:
   using: composite
   steps:
-  - run: ./entrypoint.ps1 -Files ${{ inputs.path }} -Includes ${{ inputs.includes }} -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
+  - run: .\entrypoint.ps1 -Files ${{ inputs.path }} -Includes ${{ inputs.includes }} -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
     shell: pwsh
 
 branding:
