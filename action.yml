@@ -1,0 +1,34 @@
+name: 'MQL4 Compiler'
+description: 'Compiles MQL4 programs'
+author: 'xefino'
+branding:
+  icon: 'bar-chart'
+  color: 'blue'
+inputs:
+  path:
+    description: 'Path to files that should be compiled'
+    required: true
+  includes:
+    description: 'List of paths for includes'
+    required: false
+    default: []
+    type: comma-delimited-list
+  version:
+    description: 'MetaTrader 4 platform version to use'
+    required: true
+  log-file:
+    description: 'Log filename for compilation messages.'
+    required: false
+    default: 'results.log'
+  syntax-only:
+    description: 'Whether to check for syntax only (no binary file is generated)'
+    required: false
+    default: false
+  verbose:
+    description: 'Enables verbose mode (to print more messages)'
+    required: false
+    default: false
+runs:
+  using: pwsh
+  command: |
+    ./entrypoint.ps1 -Files ${{ inputs.path }} -Includes ${{ inputs.includes }} -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
