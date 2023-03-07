@@ -34,12 +34,16 @@ try {
     }
 }
 
-Resolve-Path $Files
+if ($verbose) {
+    Write-Host "Creating log file $($LogFile)..."
+}
+
+Out-File -FilePath (Resolve-Path $LogFile)
 
 # Create our new list of arguments and add the portable flag to it
 $args = New-Object System.Collections.Generic.List[string]
 $args.Add("/portable")
-$args.Add('/compile:"{0}"' -f $Files)
+$args.Add('/compile:"{0}"' -f (Resolve-Path $Files))
 $args.Add('/inc:"{0}"' -f $Includes)
 $args.Add('/log:"{0}"' -f $LogFile)
 
