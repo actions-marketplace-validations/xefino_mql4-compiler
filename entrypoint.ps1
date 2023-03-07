@@ -15,10 +15,13 @@ param (
     [string] $SyntaxOnly
 )
 
+# Get the verbose switch
+$verbose = $PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent
+
 # Create the download URL for MetaEditor
 $url = "http://www.rosasurfer.com/.mt4/{0}/metaeditor.exe" -f $Version
 $exePath = "metaeditor.exe"
-if ($Verbose) {
+if ($verbose) {
     Write-Host "Attempting download from $($url)..."
 }
 
@@ -26,7 +29,7 @@ if ($Verbose) {
 try {
     Invoke-WebRequest -Uri $url -OutFile $exePath
 } catch {
-    if ($Verbose) {
+    if ($verbose) {
         Write-Error "Failed to download MetaEditor from $($url), error: $($_.Exception.Message)"
     }
 }
@@ -43,7 +46,7 @@ if ([System.Management.Automation.LanguagePrimitives]::ConvertToBoolean($SyntaxO
     $args.Add("/s")
 }
 
-if ($Verbose) {
+if ($verbose) {
     Write-Host "Calling $($exePath) $($args -join " ")..."
 }
 
