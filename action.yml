@@ -31,7 +31,7 @@ runs:
   - name: Run Compiler
     shell: powershell
     run: |
-      $switchParam = if (${{ inputs.includes }}) { '${{ inputs.includes }}' } else { '.' }
+      $switchParam = if ('${{ inputs.includes }}') { '${{ inputs.includes }}' } else { '.' }
       ${{ github.action_path }}\entrypoint.ps1 -Files ${{ inputs.path }} -Includes $switchParam -Version ${{ inputs.version }} -LogFile ${{ inputs.log-file }} -Verbose ${{ inputs.verbose }} -SyntaxOnly ${{ inputs.syntax-only }}
  
 branding:
